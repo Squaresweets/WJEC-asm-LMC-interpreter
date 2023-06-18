@@ -1,4 +1,3 @@
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;init and variables;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 init:
 	clrf   PORTB        ; clear PORTB output latches
