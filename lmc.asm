@@ -1,3 +1,4 @@
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;init and variables;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 init:
 	clrf   PORTB        ; clear PORTB output latches
@@ -29,6 +30,7 @@ init:
 	acc    EQU 0x3      ;The accumulator
 	
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;The interpreter;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	
 main:
 	movlw  base      
 	movwf  PC           ;start the program counter with the base address of where the data is stored
@@ -79,7 +81,9 @@ SUB:  call   xsubhun      ;200-300
 	btfsc  STATUS,C     ;check for overflows
 	incf   accm,F
 	
-	incf   accl,F       ;since it is 2s complement we need to add 1
+	movlw  1            ;since it is 2s complement we need to add 1
+	addwf  accl,F       ;we do this instead of incf as that doesnt' effect carry bit
+	
 	btfsc  STATUS,C     ;and then we need to check for overflows AGAIN
 	incf   accm,F
 	goto   nxt
@@ -318,5 +322,3 @@ ldapgrm:
 	call blit
 	
 	return
-	
-	
